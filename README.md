@@ -27,7 +27,7 @@ npm run build
 ```sh
 npm run server
 ```
-Connectez vous sur la machine ayant un serveur ouvert. Utilisez:
+Connectez vous sur la machine ayant un serveur ouvert. Utilisez:<br/>
 [http://localhost:3000](http://localhost:3000)
 <br/>
 ou
