@@ -2,6 +2,7 @@
 Premier projet du club de programmation
 
 
+
 ### Installation
 Nous utilisons Node et Npm pour accomplir des taches de dévéloppement.
 ```
@@ -13,7 +14,6 @@ Cette commande installe tout les dépendances de notre projet.
 
 ### Commandes de taches
 
-<br/>
 
 ##### Construire les /src en public/lib.js
 
@@ -21,7 +21,6 @@ Cette commande installe tout les dépendances de notre projet.
 npm run build
 ```
 
-<br/>
 
 ##### Ouvrir le serveur local de dévélopement
 
@@ -30,10 +29,11 @@ npm run server
 ```
 Connectez vous sur la machine ayant un serveur ouvert. Utilisez:
 [http://localhost:3000](http://localhost:3000)
-ou
-[http://ip_de_vorte_machine:3000](http://ip_de_vorte_machine:3000)
-
 <br/>
+ou
+<br/>
+[http://ip_de_vorte_serveur:3000](http://ip_de_vorte_serveur:3000)
+
 
 ##### Ouvrir l'éditeur de Maps
 
@@ -42,3 +42,8 @@ npm run editor
 ```
 
 <br/>
+
+
+### Demo de la page web sans serveur
+
+[Ici](https://raw.githack.com/matiasvlevi/iogame-1/master/public/index.html)
