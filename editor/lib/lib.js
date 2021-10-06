@@ -1,3 +1,6 @@
+/**
+ * Color palette
+ */
 const COLOR_CODES = {
   wall: [0, 0, 0, 255],
   spawn: [200, 0, 0],
@@ -6,8 +9,9 @@ const COLOR_CODES = {
   type3: [50, 150, 0]
 }
 
-// Set dom
-
+/**
+ * Apply color palette to DOM elements
+ */
 setTimeout(() => {
   let values = Object.values(COLOR_CODES);
   let keys = Object.keys(COLOR_CODES);
@@ -16,6 +20,9 @@ setTimeout(() => {
     elem.style = 'background-color: rgb(' + values[i].join() + ')';
   }
 }, 1);
+/**
+ * Grid component, holds all block values.
+ */
 class Grid {
   constructor(x, y, w, h, nbx, nby) {
     this.x = x;
