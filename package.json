@@ -1,0 +1,28 @@
+{
+  "name": "iogame-1",
+  "version": "1.0.0",
+  "description": "Premier projet du club de programmation",
+  "main": "index.js",
+  "scripts": {
+    "build": "grunt build",
+    "server": "node src/server/server.js",
+    "editor": "start editor/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiasvlevi/iogame-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matiasvlevi/iogame-1/issues"
+  },
+  "homepage": "https://github.com/matiasvlevi/iogame-1#readme",
+  "devDependencies": {
+    "express": "^4.17.1",
+    "grunt": "^1.4.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-terser": "^2.0.0"
+  }
+}
