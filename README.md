@@ -15,6 +15,8 @@ Premier projet du club de programmation
 
 # Dévéloppement
 
+[Voir toutes les commandes de dévélopement ici](https://github.com/matiasvlevi/iogame/blob/c801ee2897833d216ef50f4f1bcd9aaed42dcb70/package.json#L6-L12)
+
 ### Installation
 Nous utilisons Node et Npm pour accomplir des taches de dévéloppement.
 ```
@@ -54,3 +56,4 @@ npm run editor
 ```
 
 <br/>
+
