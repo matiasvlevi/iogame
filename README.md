@@ -54,8 +54,3 @@ npm run editor
 ```
 
 <br/>
-
-
-### Demo de la page web sans serveur
-
-[Ici](https://raw.githack.com/matiasvlevi/iogame-1/master/public/index.html)
