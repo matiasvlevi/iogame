@@ -6,7 +6,9 @@
   "scripts": {
     "build": "grunt build",
     "server": "node src/server/server.js",
-    "editor": "start editor/index.html"
+    "editor": "start editor/index.html",
+    "doc": "start doc/build/index.html",
+    "doc:build": "grunt vdoc"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,9 @@
     "express": "^4.17.1",
     "grunt": "^1.4.1",
     "grunt-contrib-concat": "^1.0.1",
-    "grunt-terser": "^2.0.0"
+    "grunt-terser": "^2.0.0",
+    "grunt-vdoc": "^0.1.1",
+    "handlebars": "^4.7.7",
+    "ncp": "^2.0.0"
   }
 }
