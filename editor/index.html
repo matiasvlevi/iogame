@@ -1,11 +1,30 @@
 <html>
 
 <head>
-  <script src="lib.min.js"></script>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script src="lib/lib.min.js"></script>
 </head>
 
-<body>
-  <h1>Map editor</h1>
+<body style="margin:0px;">
+
+  <div id="editor">
+
+  </div>
+
+  <div id="panel">
+    <button onClick="grid.setDrawType('wall')" id="wallbutton">Wall</button>
+    <button onClick="grid.setDrawType('spawn')" id="spawnbutton">Spawn</button>
+    <button onClick="grid.setDrawType('type1')" id="type1button">TYPE1</button>
+    <button onClick="grid.setDrawType('type2')" id="type2button">TYPE2</button>
+    <button onClick="grid.setDrawType('type3')" id="type3button">TYPE3</button>
+    <button id="deletebutton" onClick="grid.toggleDelete()" style="background-color: rgb(255,100,0)">Erase: false</button>
+
+  </div>
+  <div id="panel">
+    <input type="file" id="loadMap" />
+    <button onClick="grid.save()">Save</button>
+  </div>
 </body>
 
 </html>
