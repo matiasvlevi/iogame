@@ -3,7 +3,10 @@ module.exports = function(grunt) {
     // Build the game & editor source files
     concat: {
       build: {
-        src: ['src/game/**/*.js'],
+        src: [
+          'src/game/*/*.js',
+          'src/game/main.js'
+        ],
         dest: 'public/lib/lib.js',
       },
       editor: {
@@ -24,11 +27,29 @@ module.exports = function(grunt) {
           }
         ]
       },
-    }
+    },
+    vdoc: {
+      compile: {
+        options: {
+          meta: {
+            name: "myProject",
+            version: "0.0.0",
+            github: "https://github.com/MomoClubProg/iogame"
+          },
+          dest: "./doc/build/",
+          source: "./public/lib/lib.js",
+          content: "./doc/content/data.json",
+          templates: "./doc/theme/",
+          partials: "./doc/theme/partials/",
+          assets: "./doc/theme/assets/"
+        }
+      }
+    },
   });
 
   // Npm tasks
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-vdoc');
   grunt.loadNpmTasks('grunt-terser');
 
   // Custom tasks
