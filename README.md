@@ -1,7 +1,19 @@
 # iogame
 Premier projet du club de programmation
 
+<br/>
 
+# Jouer
+[Le jeu n'est toujours pas disponible](https://raw.githack.com/MomoClubProg/iogame/master/public/index.html)
+
+<br/><br/>
+
+# Créer
+[Editeur de cartes](https://raw.githack.com/MomoClubProg/iogame/master/editor/index.html)
+
+<br/><br/>
+
+# Dévéloppement
 
 ### Installation
 Nous utilisons Node et Npm pour accomplir des taches de dévéloppement.
