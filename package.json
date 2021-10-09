@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "grunt build",
-    "server": "node src/server/server.js",
+    "server": "node src/server/game.js",
     "editor": "start editor/index.html",
     "doc": "start doc/build/index.html",
+    "doc:server": "node src/server/doc.js",
     "doc:build": "grunt vdoc"
   },
   "repository": {
@@ -29,5 +30,8 @@
     "grunt-vdoc": "^0.1.1",
     "handlebars": "^4.7.7",
     "ncp": "^2.0.0"
+  },
+  "dependencies": {
+    "socket.io": "^4.2.0"
   }
 }

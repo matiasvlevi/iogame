@@ -4,7 +4,9 @@ module.exports = function(grunt) {
     concat: {
       build: {
         src: [
-          'src/game/*/*.js',
+          'src/game/web/*.js',
+          'src/game/env/world.js',
+          'src/game/player/player.js',
           'src/game/main.js'
         ],
         dest: 'public/lib/lib.js',
