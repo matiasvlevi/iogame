@@ -40,7 +40,7 @@ io.on('connection', socket => {
 
     // Add all players to client's world
     socket.to(room).emit('newPlayer', player.toObject());
-    socket.emit('selfPlayer', player);
+
 
     playersList = Object.values(world.players);
 
@@ -49,22 +49,28 @@ io.on('connection', socket => {
         socket.emit('newPlayer', playersList[i].toObject());
       }
     }
-
+    socket.emit('selfPlayer', player);
   });
-  socket.on("disconnecting", (reason) => {
+  socket.on('updatePos', (data) => {
+    world.players[data.sid].pos = data.pos;
+    world.players[data.sid].vel = data.vel;
+    socket.to(room).emit('updatePosClient', data);
+  })
+  socket.on('disconnecting', (reason) => {
     // get all connected socket IDs
     let sids = socket.adapter.sids.keys();
     for (sid of sids) {
       // Remove if same ID
       if (sid === socket.id) {
         // Remove player from server's world
-        let name = world.players[socket.id].username;
-        delete world.players[socket.id];
+        let name = 'unknown';
+        if (Object.values(world.players).length > 0) {
+          name = world.players[socket.id].username;
+          delete world.players[socket.id];
+        }
 
         // Remove player from client's world
         socket.to(room).emit('removePlayer', sid);
-
-
 
         gameServer.log(`\x1b[32m${name}\x1b[0m left the server.`, world);
       }
