@@ -7,10 +7,8 @@ if (!isBrowser) {
   world = new World();
 }
 
-
-
 class Player {
-  constructor(id, sid, x = 0, y = 0) {
+  constructor(name, sid, x = 0, y = 0) {
     this.pos = {
       x,
       y
@@ -19,7 +17,9 @@ class Player {
       x: 0,
       y: 0
     }
-    this.id = id;
+    this.size = 16;
+    this.self = false;
+    this.username = name;
     this.sid = sid;
     this.skin = 'default';
   }
@@ -38,19 +38,26 @@ class Player {
       y
     }
   }
-  render() {
+  render(sid) {
+
+    if (this.sid === sid) {
+      fill(100, 100, 100, 100);
+      ellipse(this.pos.x, this.pos.y, 64, 64);
+    }
 
     // Color
     noStroke();
     fill.apply(1, world.skins[this.skin])
 
     // Shape
-    ellipse(this.pos.x, this.pos.y, 16, 16);
+    ellipse(this.pos.x, this.pos.y, this.size, this.size);
+
+
+    text(this.username, this.pos.x + this.size, this.pos.y + this.size);
   }
 }
 
-
-
+// Export is in node environement
 if (!isBrowser) {
   module.exports = Player;
 }

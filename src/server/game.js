@@ -1,7 +1,7 @@
 // Game environement
 const world = require('../../src/game/env/world.js');
-const Player = require('../../src/game/player/player.js');
-console.log(world);
+const makePath = require('./lib/makePath.js');
+const gameServer = require('./lib/logger.js');
 
 // Http server
 const express = require('express');
@@ -17,79 +17,62 @@ const io = new Server(server);
 const port = 3000;
 
 // Parse ./public path
-let d = __dirname.split('\\');
-let hostDir = 'public';
-let path = d
-  .splice(0, d.length - 2)
-  .join('\\') + "\\" + hostDir;
+let path = makePath('public');
 
 // Host directory
 app.use(express.static(path));
-let socket_id;
-
-
-function clientsInRoom(namespace, room) {
-  var clients = io.nsps[namespace].adapter.rooms[room];
-  return Object.keys(clients).length;
-}
 
 // Socket server
 io.on('connection', socket => {
 
+  // Join a room
   let room = 'Room1';
   socket.join(room);
 
+  // On player join
+  socket.on('playerJoin', (name) => {
 
-  let sids = socket.to('Room1').adapter.sids.keys()
-
-
-  // console.log(' \n\n Connected Players: \n');
-  // let i = 1;
-  // for (let sid of sids) {
-  //   console.log(i + '. ' + sid);
-  //   i++
-  // }
-
-
-  socket_id = socket.id;
-
-
-  socket.on('playerJoin', (id) => {
-    let player = world.addPlayer(id, socket.id, room);
+    // Add player to server's world
+    let player = world.addPlayer(name, socket.id);
 
     // Player join message
-    console.log(` > Player sid: ${socket.id}, id: ${id} joined the server !`);
+    gameServer.log(`\x1b[32m${name}\x1b[0m joined the server!`, world);
 
-    // Sync with client
-    console.log(player);
+    // Add all players to client's world
+    socket.to(room).emit('newPlayer', player.toObject());
+    socket.emit('selfPlayer', player);
 
-    socket.to("Room1").emit('newPlayer', player.toObject());
-    if (Object.keys(world.players) !== 0) {
-      let players_ = Object.values(world.players);
-      for (let i = 0; i < players_.length; i++) {
-        socket.emit('newPlayer', players_[i].toObject());
+    playersList = Object.values(world.players);
+
+    if (playersList.length !== 0) {
+      for (let i = 0; i < playersList.length; i++) {
+        socket.emit('newPlayer', playersList[i].toObject());
       }
     }
 
   });
   socket.on("disconnecting", (reason) => {
-
+    // get all connected socket IDs
     let sids = socket.adapter.sids.keys();
-    console.log(socket.id)
-    console.log(sids)
     for (sid of sids) {
+      // Remove if same ID
       if (sid === socket.id) {
-        socket.to("Room1").emit('removePlayer', sid);
+        // Remove player from server's world
+        let name = world.players[socket.id].username;
         delete world.players[socket.id];
-        console.log(` > ${socket.id} User has left`);
 
+        // Remove player from client's world
+        socket.to(room).emit('removePlayer', sid);
+
+
+
+        gameServer.log(`\x1b[32m${name}\x1b[0m left the server.`, world);
       }
     }
-
   });
+});
 
-})
-
+// Listen
 server.listen(port, () => {
-  console.log(`listening on ${port}`);
+  console.log(`Game Server on http://localhost:${port}\n`);
 });
