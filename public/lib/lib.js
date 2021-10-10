@@ -210,14 +210,11 @@ if (isBrowser) {
   });
   socket.on('selfPlayer', (obj) => {
     player = World.fromObject(new Player(), obj);
-    console.log(player);
-    console.log(world.players[obj.sid], obj.sid)
     world.players[obj.sid].self = true;
   });
   socket.on('updatePosClient', (data) => {
     world.players[data.sid].pos = data.pos;
     world.players[data.sid].vel = data.vel;
-    console.log(data)
   })
 }
 
