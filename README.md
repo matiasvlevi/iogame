@@ -29,11 +29,29 @@ Cette commande installe tout les dépendances de notre projet.
 ### Commandes de taches
 
 
+
+
 ##### Construire les /src en public/lib.js
 
 ```sh
 npm run build
 ```
+
+<br/>
+
+#### Construire la documentation /src en doc/index.html
+
+```sh
+npm run doc:build
+```
+
+Ouvrir la page de documententation:
+
+```sh
+npm run doc
+```
+
+<br/>
 
 
 ##### Ouvrir le serveur local de dévélopement
