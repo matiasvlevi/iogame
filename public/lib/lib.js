@@ -25,9 +25,24 @@ class World {
   constructor() {
     this.players = {};
     this.tick = 0;
+    this.wn = {
+      x: 800,
+      y: 800
+    }
     this.skins = {
       default: [255, 255, 255]
     };
+  }
+  update() {
+    for (let player in world.players) {
+      world.players[player].update();
+    }
+  }
+  setSize(x, y) {
+    this.wn = {
+      x,
+      y
+    }
   }
   playerJoin(name = 'username') {
     socket.emit('playerJoin', name);
@@ -35,7 +50,7 @@ class World {
   addPlayer(name, sid) {
     if (typeof name === 'string') {
       let player = new Player(name, sid);
-      player.setPos(Math.random() * 500, Math.random() * 500)
+      player.setPos(Math.random() * this.wn.x, Math.random() * this.wn.y)
       this.players[sid] = player;
       return player;
     } else if (typeof name === 'object') {
@@ -100,6 +115,7 @@ class Player {
     this.username = name;
     this.sid = sid;
     this.skin = 'default';
+    this.speed = 1.5;
   }
   toObject() {
     let keys = Object.keys(this);
@@ -118,28 +134,71 @@ class Player {
   }
   render(sid) {
 
+    // is main player:
     if (this.sid === sid) {
       fill(100, 100, 100, 100);
       ellipse(this.pos.x, this.pos.y, 64, 64);
     }
 
-    // Color
     noStroke();
     fill.apply(1, world.skins[this.skin])
 
-    // Shape
     ellipse(this.pos.x, this.pos.y, this.size, this.size);
-
-
     text(this.username, this.pos.x + this.size, this.pos.y + this.size);
   }
+  update() {
+
+
+    //Keyboard
+    //up & down
+    if (this.self) {
+      if (keyIsDown(UP_ARROW)) {
+        this.addForce(0, -1);
+      } else if (keyIsDown(DOWN_ARROW)) {
+        this.addForce(0, 1);
+      }
+      // left & right
+      if (keyIsDown(LEFT_ARROW)) {
+        this.addForce(-1, 0);
+      } else if (keyIsDown(RIGHT_ARROW)) {
+        this.addForce(1, 0);
+      }
+    }
+
+
+    // Physics
+    this.pos.x += this.vel.x;
+    this.pos.y += this.vel.y;
+    this.vel.x *= 0.9;
+    this.vel.y *= 0.9;
+  };
+  addForce(x, y) {
+    this.vel.x += x * this.speed;
+    this.vel.y += y * this.speed;
+
+
+    console.log(this.pos, this.vel)
+    socket.emit('updatePos', {
+      sid: this.sid,
+      pos: this.pos,
+      vel: this.vel
+    });
+
+    // this.update();
+  }
+
 }
+
+
+
+
 
 // Export is in node environement
 if (!isBrowser) {
   module.exports = Player;
 }
 let player;
+// Socket.io Events
 if (isBrowser) {
   socket.on('newPlayer', (obj) => {
     world.addPlayer(obj);
@@ -151,21 +210,28 @@ if (isBrowser) {
   });
   socket.on('selfPlayer', (obj) => {
     player = World.fromObject(new Player(), obj);
+    console.log(player);
+    console.log(world.players[obj.sid], obj.sid)
+    world.players[obj.sid].self = true;
   });
+  socket.on('updatePosClient', (data) => {
+    world.players[data.sid].pos = data.pos;
+    world.players[data.sid].vel = data.vel;
+    console.log(data)
+  })
 }
 
 
 /**
  * p5js Canvas Setup
  */
-let wnx = window.innerWidth;
-let wny = window.innerHeight;
 
 function setup() {
-  wnx = window.innerWidth;
-  wny = window.innerHeight;
+  let wnx = window.innerWidth;
+  let wny = window.innerHeight;
   createCanvas(wnx, wny);
   world.playerJoin(prompt('Nickname:'));
+  world.setSize(wnx, wny);
 }
 /**
  * p5js Canvas Setup
@@ -173,4 +239,5 @@ function setup() {
 function draw() {
   background(51);
   world.render(player);
+  world.update();
 }

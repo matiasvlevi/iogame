@@ -1,4 +1,5 @@
 let player;
+// Socket.io Events
 if (isBrowser) {
   socket.on('newPlayer', (obj) => {
     world.addPlayer(obj);
@@ -10,21 +11,25 @@ if (isBrowser) {
   });
   socket.on('selfPlayer', (obj) => {
     player = World.fromObject(new Player(), obj);
+    world.players[obj.sid].self = true;
   });
+  socket.on('updatePosClient', (data) => {
+    world.players[data.sid].pos = data.pos;
+    world.players[data.sid].vel = data.vel;
+  })
 }
 
 
 /**
  * p5js Canvas Setup
  */
-let wnx = window.innerWidth;
-let wny = window.innerHeight;
 
 function setup() {
-  wnx = window.innerWidth;
-  wny = window.innerHeight;
+  let wnx = window.innerWidth;
+  let wny = window.innerHeight;
   createCanvas(wnx, wny);
   world.playerJoin(prompt('Nickname:'));
+  world.setSize(wnx, wny);
 }
 /**
  * p5js Canvas Setup
@@ -32,4 +37,5 @@ function setup() {
 function draw() {
   background(51);
   world.render(player);
+  world.update();
 }

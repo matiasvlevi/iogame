@@ -11,9 +11,24 @@ class World {
   constructor() {
     this.players = {};
     this.tick = 0;
+    this.wn = {
+      x: 800,
+      y: 800
+    }
     this.skins = {
       default: [255, 255, 255]
     };
+  }
+  update() {
+    for (let player in world.players) {
+      world.players[player].update();
+    }
+  }
+  setSize(x, y) {
+    this.wn = {
+      x,
+      y
+    }
   }
   playerJoin(name = 'username') {
     socket.emit('playerJoin', name);
@@ -21,7 +36,7 @@ class World {
   addPlayer(name, sid) {
     if (typeof name === 'string') {
       let player = new Player(name, sid);
-      player.setPos(Math.random() * 500, Math.random() * 500)
+      player.setPos(Math.random() * this.wn.x, Math.random() * this.wn.y)
       this.players[sid] = player;
       return player;
     } else if (typeof name === 'object') {
