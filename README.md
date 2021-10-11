@@ -31,7 +31,7 @@ Cette commande installe tout les dépendances de notre projet.
 
 
 
-##### Construire les /src en public/lib.js
+##### Construire les fichiers source
 
 ```sh
 npm run build
@@ -39,7 +39,7 @@ npm run build
 
 <br/>
 
-#### Construire la documentation /src en doc/index.html
+#### Construire la documentation
 
 ```sh
 npm run doc:build
@@ -62,9 +62,9 @@ npm run server
 Connectez vous sur la machine ayant un serveur ouvert. Utilisez:<br/>
 [http://localhost:3000](http://localhost:3000)
 <br/>
-ou
+ou utilisez notre serveur 
 <br/>
-[http://ip_de_vorte_serveur:3000](http://ip_de_vorte_serveur:3000)
+[http://http://173.176.18.128:3000](http://http://173.176.18.128:3000/)
 
 
 ##### Ouvrir l'éditeur de Maps
