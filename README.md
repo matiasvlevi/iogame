@@ -64,7 +64,7 @@ Connectez vous sur la machine ayant un serveur ouvert. Utilisez:<br/>
 <br/>
 ou utilisez notre serveur 
 <br/>
-[http://http://173.176.18.128:3000](http://http://173.176.18.128:3000/)
+[http://173.176.18.128:3000](http://173.176.18.128:3000/)
 
 
 ##### Ouvrir l'éditeur de Maps
