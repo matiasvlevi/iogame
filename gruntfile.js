@@ -7,6 +7,7 @@ module.exports = function(grunt) {
           'src/game/web/*.js',
           'src/game/env/world.js',
           'src/game/player/player.js',
+          'src/game/events.js',
           'src/game/main.js'
         ],
         dest: 'public/lib/lib.js',

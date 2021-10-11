@@ -43,7 +43,6 @@ io.on('connection', socket => {
 
 
     playersList = Object.values(world.players);
-
     if (playersList.length !== 0) {
       for (let i = 0; i < playersList.length; i++) {
         socket.emit('newPlayer', playersList[i].toObject());

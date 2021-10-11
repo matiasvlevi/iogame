@@ -72,7 +72,6 @@ class Player {
       }
     }
 
-
     // Physics
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;
@@ -83,22 +82,13 @@ class Player {
     this.vel.x += x * this.speed;
     this.vel.y += y * this.speed;
 
-
-    console.log(this.pos, this.vel)
     socket.emit('updatePos', {
       sid: this.sid,
       pos: this.pos,
       vel: this.vel
     });
-
-    // this.update();
   }
-
 }
-
-
-
-
 
 // Export is in node environement
 if (!isBrowser) {

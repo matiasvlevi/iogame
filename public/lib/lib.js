@@ -165,7 +165,6 @@ class Player {
       }
     }
 
-
     // Physics
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;
@@ -176,22 +175,13 @@ class Player {
     this.vel.x += x * this.speed;
     this.vel.y += y * this.speed;
 
-
-    console.log(this.pos, this.vel)
     socket.emit('updatePos', {
       sid: this.sid,
       pos: this.pos,
       vel: this.vel
     });
-
-    // this.update();
   }
-
 }
-
-
-
-
 
 // Export is in node environement
 if (!isBrowser) {
@@ -205,8 +195,9 @@ if (isBrowser) {
     Logger.server(`${obj.username} joined the game!`);
   });
   socket.on('removePlayer', (sid) => {
+    let name = world.players[sid].username;
     delete world.players[sid];
-    Logger.server(`player ${sid} left the game`);
+    Logger.server(`player ${name} left the game`);
   });
   socket.on('selfPlayer', (obj) => {
     player = World.fromObject(new Player(), obj);
@@ -217,8 +208,6 @@ if (isBrowser) {
     world.players[data.sid].vel = data.vel;
   })
 }
-
-
 /**
  * p5js Canvas Setup
  */
