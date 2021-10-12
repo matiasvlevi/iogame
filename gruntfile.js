@@ -7,6 +7,7 @@ module.exports = function(grunt) {
           'src/game/web/*.js',
           'src/game/env/world.js',
           'src/game/player/player.js',
+          'src/game/events.js',
           'src/game/main.js'
         ],
         dest: 'public/lib/lib.js',
@@ -39,7 +40,7 @@ module.exports = function(grunt) {
             github: "https://github.com/MomoClubProg/iogame"
           },
           dest: "./doc/build/",
-          source: "./public/lib/lib.js",
+          source: "./src/**/*.js",
           content: "./doc/content/data.json",
           templates: "./doc/theme/",
           partials: "./doc/theme/partials/",
