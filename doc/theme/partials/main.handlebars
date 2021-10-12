@@ -2,12 +2,8 @@
 
   <h1>Methods</h1>
   <ul>
-    {{#globals}}
-      {{#methods}}
-        <li>{{{name}}}</li>
-        <p>{{{description}}}</p>
-        <br/>
-      {{/methods}}
-    {{/globals}}
+    {{#classes}}
+      {{>class}}
+    {{/classes}}
   </ul>
 </main>
