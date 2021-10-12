@@ -40,7 +40,7 @@ module.exports = function(grunt) {
             github: "https://github.com/MomoClubProg/iogame"
           },
           dest: "./doc/build/",
-          source: "./public/lib/lib.js",
+          source: "./src/**/*.js",
           content: "./doc/content/data.json",
           templates: "./doc/theme/",
           partials: "./doc/theme/partials/",

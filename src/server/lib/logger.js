@@ -1,6 +1,20 @@
-class gameServer {}
+/**
+ * @class GameLogger
+ * @constructor
+ */
+class GameLogger {
+  constructor() {
+    // Y u making instace? ;(
+  }
+}
 
-gameServer.log = (msg, world) => {
+/**
+ * @method log
+ * @param {String} msg message to log in the server console
+ * @param {String} world current world object.
+ * @return message string 
+ */
+GameLogger.log = (msg, world) => {
   let n = Object.values(world.players).length;
   let t = 20;
   let date = new Date().toLocaleTimeString().slice(0, 5);
@@ -10,4 +24,4 @@ gameServer.log = (msg, world) => {
   return str;
 }
 
-module.exports = gameServer;
+module.exports = GameLogger;

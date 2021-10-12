@@ -6,6 +6,7 @@ if (!isBrowser) {
 
 /**
  * @class World
+ * @constructor
  */
 class World {
   constructor() {
@@ -19,11 +20,8 @@ class World {
       default: [255, 255, 255]
     };
   }
-  update() {
-    for (let player in world.players) {
-      world.players[player].update();
-    }
-  }
+
+
   setSize(x, y) {
     this.wn = {
       x,
@@ -57,15 +55,7 @@ class World {
     }
     return player;
   }
-  toObject() {
-    let keys = Object.keys(this);
-    let values = Object.values(this);
-    let obj = {};
-    for (let i = 0; i < keys.length; i++) {
-      obj[keys[i]] = values[i];
-    }
-    return obj;
-  }
+
   render(clientPlayer) {
     let values = Object.values(this.players);
     for (let i = 0; i < values.length; i++) {
@@ -73,7 +63,29 @@ class World {
     }
   }
 }
+/**
+ * Converti une instance de World en objet simple
+ * @method toObject
+ */
+World.prototype.toObject = function toObject() {
+  let keys = Object.keys(this);
+  let values = Object.values(this);
+  let obj = {};
+  for (let i = 0; i < keys.length; i++) {
+    obj[keys[i]] = values[i];
+  }
+  return obj;
+}
 
+/**
+ * Update call
+ * @method update
+ */
+World.prototype.update = function update() {
+  for (let player in world.players) {
+    world.players[player].update();
+  }
+}
 if (!isBrowser) {
   module.exports = new World();
 }

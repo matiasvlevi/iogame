@@ -1,7 +1,7 @@
 // Game environement
 const world = require('../../src/game/env/world.js');
 const makePath = require('./lib/makePath.js');
-const gameServer = require('./lib/logger.js');
+const GameLogger = require('./lib/logger.js');
 
 // Http server
 const express = require('express');
@@ -36,7 +36,7 @@ io.on('connection', socket => {
     let player = world.addPlayer(name, socket.id);
 
     // Player join message
-    gameServer.log(`\x1b[32m${name}\x1b[0m joined the server!`, world);
+    GameLogger.log(`\x1b[32m${name}\x1b[0m joined the server!`, world);
 
     // Add all players to client's world
     socket.to(room).emit('newPlayer', player.toObject());
@@ -71,7 +71,7 @@ io.on('connection', socket => {
         // Remove player from client's world
         socket.to(room).emit('removePlayer', sid);
 
-        gameServer.log(`\x1b[32m${name}\x1b[0m left the server.`, world);
+        GameLogger.log(`\x1b[32m${name}\x1b[0m left the server.`, world);
       }
     }
   });
